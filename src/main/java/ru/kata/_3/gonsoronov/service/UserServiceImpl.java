@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
+
     @Autowired
     @Lazy
     public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
@@ -67,4 +68,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return userDao.getUserByLogin(login);
     }
+
 }

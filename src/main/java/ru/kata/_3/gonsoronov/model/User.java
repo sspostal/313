@@ -29,7 +29,7 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "login")
+    @Column(name = "login", unique = true)
     private String login;
 
     @Column(name = "password")
@@ -114,7 +114,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return this.login;
     }
 
     @Override

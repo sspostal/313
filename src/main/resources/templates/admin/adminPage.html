@@ -42,7 +42,7 @@
                     <div class="tab-content" id="tabContent">
                         <ul class="nav nav-tabs">
                             <a class="nav-link active" data-toggle="tab">Users Table</a>
-                            <a class="nav-link" data-toggle="tab" th:href="@{/add}">New User</a>
+                            <a class="nav-link" data-toggle="tab" th:href="@{/admin/add}">New User</a>
                         </ul>
                         <div class="card">
                             <div class="card-header">
@@ -75,8 +75,6 @@
                                         <td>
                                             <a type="button" class="btn btn-sm" style="background-color: #008B8B; color: white;" data-bs-toggle="modal"
                                                data-bs-target="#editModal" th:data-bs-target="${'#editModal'+user.id}">Edit</a>
-
-
                                         </td>
                                         <td>
                                             <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -84,6 +82,7 @@
                                                th:data-bs-target="${'#DELETE'+user.id}">Delete</a>
                                         </td>
 
+                                        <!-- Модальное окно для редактирования -->
                                         <div class="modal fade" th:id="${'editModal'+user.id}"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" modal-dialog-centered>
@@ -93,8 +92,8 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                                 aria-label="Close"></button>
                                                     </div>
-                                                    <form th:action="@{/{id}/update(id=${user.id})}"
-                                                          th:object="${user}" th:method="PUT">
+                                                    <form th:action="@{/admin/edit/{id}(id=${user.id})}"
+                                                          th:object="${user}" method="post">
                                                         <div class="modal-body col-md text-center">
                                                             <br>
                                                             <label for="name0"><b>Name</b></label>
@@ -111,7 +110,6 @@
                                                             <input th:name="age" th:type="number"
                                                                    class="form-control" id="age0"
                                                                    th:value="${user.age}"/>
-                                                            <br>
                                                             <br>
                                                             <label for="email0"><b>Email</b></label>
                                                             <input th:name="email" th:type="text"
@@ -149,6 +147,8 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Модальное окно для удаления -->
                                         <div class="modal fade" th:id="${'DELETE'+user.id}"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -161,8 +161,8 @@
                                                                 aria-label="Close"></button>
                                                     </div>
                                                     <form class="modal-body col-md text-center"
-                                                          th:action="@{/{id}/delete(id=${user.id})}"
-                                                          th:method="DELETE">
+                                                          th:action="@{/admin/delete/{id}(id=${user.id})}"
+                                                          method="post">
                                                         <div class="modal-body col-md">
                                                             <label for="id"><b>ID</b></label>
                                                             <input th:name="id" th:type="text" class="form-control"
